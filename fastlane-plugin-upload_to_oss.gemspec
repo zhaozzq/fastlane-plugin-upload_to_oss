@@ -6,10 +6,10 @@ Gem::Specification.new do |spec|
   spec.name          = 'fastlane-plugin-upload_to_oss'
   spec.version       = Fastlane::UploadToOss::VERSION
   spec.author        = 'zhaozq'
-  spec.email         = 'zhao_zzq2012@163.com'
+  spec.email         = 'zhao.zq@outlook.com'
 
   spec.summary       = '上传ipa文件到oss'
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-upload_to_oss"
+  spec.homepage      = "https://github.com/zhaozzq/fastlane-plugin-upload_to_oss"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency('rubocop-performance')
   spec.add_development_dependency('rubocop-require_tools')
   spec.add_development_dependency('simplecov')
+  spec.add_development_dependency('aliyun/oss')
 end
