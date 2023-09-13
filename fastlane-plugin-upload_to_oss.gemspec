@@ -33,5 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency('rubocop-performance')
   spec.add_development_dependency('rubocop-require_tools')
   spec.add_development_dependency('simplecov')
-  spec.add_development_dependency('aliyun/oss')
+  spec.add_development_dependency('aliyun-sdk', '~> 0.8.0')
 end
