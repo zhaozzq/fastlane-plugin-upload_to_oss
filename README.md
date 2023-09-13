@@ -12,7 +12,7 @@ fastlane add_plugin upload_to_oss
 
 ## About upload_to_oss
 
-上传ipa文件到oss
+上传ipa文件到oss, 上传结果共享到 SharedValues::OSS_IPA_OUTPUT_URL
 
 **Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
 

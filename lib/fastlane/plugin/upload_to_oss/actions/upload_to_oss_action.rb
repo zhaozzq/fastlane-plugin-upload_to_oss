@@ -10,7 +10,6 @@ module Fastlane
 
     class UploadToOssAction < Action
       def self.run(params)
-        UI.message("The upload_to_oss plugin is working!")
 
         ipa = params[:ipa]
         dsym = params[:dsym]
@@ -27,7 +26,6 @@ module Fastlane
         ipa_name = ipa_segments[-1]
 
         object_key = object_path + '/' + ipa_name
-        UI.message("oss object key #{object_key}!")
 
         require 'aliyun/oss'
 
