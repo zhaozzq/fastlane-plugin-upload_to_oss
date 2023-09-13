@@ -47,20 +47,21 @@ module Fastlane
         UI.message("upload ipa ...")
         result = bucket_object.put_object(object_key, :file => ipa)
 
-      if result 
+        if result 
 
-        endpoint_host = URI.parse(endpoint).host
-        ipa_url = "https://#{bucket}.#{endpoint_host}/#{object_key}"
-        UI.message("put_object over!")
+          endpoint_host = URI.parse(endpoint).host
+          ipa_url = "https://#{bucket}.#{endpoint_host}/#{object_key}"
+          UI.message("put_object over!")
 
-        Actions.lane_context[SharedValues::OSS_IPA_OUTPUT_URL] = ipa_url
+          Actions.lane_context[SharedValues::OSS_IPA_OUTPUT_URL] = ipa_url
 
-        UI.message("lane_context OSS_IPA_OUTPUT_URL:#{Actions.lane_context[SharedValues::OSS_IPA_OUTPUT_URL]}")
+          UI.message("lane_context OSS_IPA_OUTPUT_URL:#{Actions.lane_context[SharedValues::OSS_IPA_OUTPUT_URL]}")
 
-      else 
-        UI.error("upload fail")
-      end
+        else 
+          UI.error("upload fail")
+        end
 
+        return ipa_url
       end
 
       def self.description
@@ -77,7 +78,7 @@ module Fastlane
 
       def self.output
         [
-          ['IPA_OUTPUT_PATH', 'ipa file oss url']
+          ['OSS_IPA_OUTPUT_URL', 'ipa file oss url']
         ]
       end
 
@@ -89,38 +90,38 @@ module Fastlane
       def self.available_options
         [
           FastlaneCore::ConfigItem.new(key: :ipa,
-                                  env_name: "HAIER_ENTERPRISE_RESIGN_IPA",
+                                  env_name: "UPLOAD_TO_OSS_IPA",
                                description: ".ipa file for the build",
                                   optional: true,
                              default_value: Actions.lane_context[SharedValues::IPA_OUTPUT_PATH]),
           FastlaneCore::ConfigItem.new(key: :dsym,
-                                  env_name: "HAIER_ENTERPRISE_RESIGN_DSYM",
+                                  env_name: "UPLOAD_TO_OSS_DSYM",
                                description: "zipped .dsym package for the build ",
                                   optional: true,
                              default_value: Actions.lane_context[SharedValues::DSYM_OUTPUT_PATH]),
           FastlaneCore::ConfigItem.new(key: :endpoint,
-                                  env_name: "HAIER_ENTERPRISE_RESIGN_ENDPOINT",
+                                  env_name: "UPLOAD_TO_OSS_ENDPOINT",
                                description: "oss endpoint, default value http://oss-cn-qingdao.aliyuncs.com",
                                   optional: true,
                              default_value: "http://oss-cn-qingdao.aliyuncs.com"),
 
           FastlaneCore::ConfigItem.new(key: :key,
-                                  env_name: "HAIER_ENTERPRISE_RESIGN_KEY",
+                                  env_name: "UPLOAD_TO_OSS_KEY",
                                description: "oss key",
                                   optional: true,
                              default_value: ENV['OSS_ACCESS_KEY_ID']),
           FastlaneCore::ConfigItem.new(key: :secret,
-                                  env_name: "HAIER_ENTERPRISE_RESIGN_SECRET",
+                                  env_name: "UPLOAD_TO_OSS_SECRET",
                                description: "oss secret",
                                   optional: true,
                              default_value: ENV['OSS_ACCESS_KEY_SECRET']),
           FastlaneCore::ConfigItem.new(key: :bucket,
-                                  env_name: "HAIER_ENTERPRISE_RESIGN_BUCKET",
+                                  env_name: "UPLOAD_TO_OSS_BUCKET",
                                description: "oss bucket",
                                   optional: false,
                                       type: String),
           FastlaneCore::ConfigItem.new(key: :object_path,
-                                  env_name: "HAIER_ENTERPRISE_RESIGN_OBJECT_PATH",
+                                  env_name: "UPLOAD_TO_OSS_OBJECT_PATH",
                                description: "oss object key 'foo/bar/file', object path 'foo/bar'",
                                   optional: false,
                                       type: String),
