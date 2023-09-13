@@ -1,3 +1,12 @@
 lane :test do
-  upload_to_oss
+
+  ENV['OSS_ACCESS_KEY_ID'] = 'OSS_ACCESS_KEY_ID'
+  ENV['OSS_ACCESS_KEY_SECRET'] = 'OSS_ACCESS_KEY_SECRET'
+
+  build_app
+  upload_to_oss(
+    bucket: 'app-download',
+    object_path: 'temp/test'
+  )
+  puts Actions.lane_context[SharedValues::OSS_IPA_OUTPUT_URL]
 end
